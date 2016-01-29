@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% load staticfiles %} {% block main_content %}
+<!-- Page Header -->
+<!-- Set your background image for this header on the line below. -->
+<header class="intro-header" style="background-image: url('{% static 'img/about-bg.jpg' %}')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="page-heading">
+                    <h1>Feels bad, man.</h1>
+                    <hr class="small">
+                    <span class="subheading">Error 500</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div align="center">
+                <img src="{% static 'img/sad.png' %}" height="459" width="436">
+            </div>
+        </div>
+    </div>
+</div>
+<hr> {% endblock main_content %}

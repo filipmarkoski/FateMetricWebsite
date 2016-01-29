@@ -1,0 +1,36 @@
+{% extends "main/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    About
+{% endblock title %}
+
+{% block content %}
+    
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <img src="{% static 'img/about-bg.jpg' %}">
+                <br>
+                <p>Jacque's words is a simple project. <br>
+                There is <a href="https://github.com/AquaSolid/DjangoCleanBlog">GitHub repository</a> link provided at the bottom of the page.</p>
+
+                <p>Jacque's words is powered by the Python framework Django.
+                It's a simple blog where a person can log in, make a post and also view other posts and even comment on them.</p>
+
+                <p>Besides the blog, there are other features such as the polls application which is featured on the right side of the homepage. This feature allows a person to vote on a specific question which can only be provided by an admin. These questions are specifically designed to be interesting and perhaps thought-provoking.</p>
+
+                <p>It is recommended that the posts be unique, in the sense that they provide original content, a creative view or opinion on a certain subject or material. For more information feel free to visit <a href="https://jacqueswords.herokuapp.com/blog/how-to-make-a-post/">How to make a post</a> for instructions on posting.</p>
+
+                <p>Thank you for using this website, we hope you enjoy the content provided by some of our users and/or staff.</p>
+
+                <p>For more information, feel free to visit the <a href="{% url 'contact' %}">contact page</a>.</p>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+
+{% endblock content %}

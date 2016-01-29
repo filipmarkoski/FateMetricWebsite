@@ -1,0 +1,62 @@
+/* Fonts */
+
+@font-face {
+   font-family: Quasith-Regular;
+   src: url(../fonts/Quasith-Regular.otf);
+}
+
+@import url(https://fonts.googleapis.com/css?family=Exo:400,200italic);
+
+
+/* Nav Bar */
+
+.navbar-inverse{
+    background-color: #151515;
+    border-color: #151515;
+    border-bottom: 4px solid #00bfff;
+}
+
+/* /Nav Bar */
+
+.container-fluid{
+    width: 60%;
+}
+
+#welcome{
+    text-align: center;
+    padding-top: 10%;
+    font-family: "Quasith-Regular";
+    color: white;
+}
+
+html, body{
+	font:18px/1.5 Arial, Helvetica, sans-serif;
+	background: whitesmoke;
+}
+
+
+#have{
+    text-align: center;
+    padding-bottom: 10%;
+    font-family: "Quasith-Regular";
+    color: white;
+}
+
+.container{
+    width: 940px;
+    margin: 0 auto 40px;
+}
+
+.post-info{
+	font-style: italic;
+	color: #999;
+	font-size: 85%;
+}
+
+.spacing {
+    padding-top: 20px;
+}
+
+hr{
+    margin-right: 43px;
+}
