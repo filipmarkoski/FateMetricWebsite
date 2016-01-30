@@ -6,12 +6,25 @@
 {% endblock title %}
 
 {% block content %}
-    
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('/static/img/about-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>About <br> Jacque's Words</h1>
+                        <hr class="small">
+                        <span class="subheading">Feel free to read.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <!-- Main Content -->
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <img src="{% static 'img/about-bg.jpg' %}">
                 <br>
                 <p>Jacque's words is a simple project. <br>
                 There is <a href="https://github.com/AquaSolid/DjangoCleanBlog">GitHub repository</a> link provided at the bottom of the page.</p>
@@ -26,7 +39,7 @@
                 <p>Thank you for using this website, we hope you enjoy the content provided by some of our users and/or staff.</p>
 
                 <p>For more information, feel free to visit the <a href="{% url 'contact' %}">contact page</a>.</p>
-            </div>
+            
         </div>
     </div>
 

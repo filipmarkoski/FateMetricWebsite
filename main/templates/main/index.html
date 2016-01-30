@@ -1,19 +1,56 @@
-{% extends 'main/base.html' %}
-{% load staticfiles %}
+{% extends 'main/base.html' %} {% load staticfiles %} {% block title %}FateMetric{% endblock title %} {% block content %}
+<!-- WELCOME SECTION -->
+<div class="jumbotron" style="background-image: url({% static 'img/leather-slippers.jpg' %}) ; background-size: 100%;">
+    <div class="container">
+        <h1 id="welcome">Welcome to FateMetric</h1>
+        <h3 id="have">Have fun and ENJOY your jeruselums</h3>
+    </div>
+</div>
+<!-- WELCOME SECTION -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2"><b>Categories:</b>
+            <br>
+            <br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            <br> <br>
+        </div>
+        <div class="col-md-7">
+            <img src="{% static 'img/post-bg.jpg' %}" class="img-responsive">
+            <h2>This is the Title</h2>
+            <p class="post-info">This was posted on the 2nd of March 2015 by Stefan Nikolovski</p>
+            Preview: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            <hr>
+            <div>
+            <div class="pull-left">
+            	Likes: 0 Dislikes: 0 Comments: 0
+            </div>
 
-{% block title %}FateMetric{% endblock title %}
-
-{% block content %}
-	<div class="container">
-		<div class="row">
-			<div class="col-md-2">SAMPLE TEXTSAMPLE TEXTSAMPLE TEXTSAMPLE TEXTSAMPLE TEXTSAMPLE TEXTSAMPLE TEXTSAMPLE TEXTSAMPLE TEXTSAMPLE TEXTSAMPLE TEXTSAMPLE TEXT 
-			</div>
-			<div class="col-md-6">
-				SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT 
-			</div>
-			<div class="col-md-4">
-				SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT SAMPLE TEXT 
-			</div>
-		</div>
-	</div>
+            	<div style="text-align:right">
+            	<button type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like
+            </button>
+            <button type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Dislike
+            </button>
+            <button type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment
+            </button>
+            </div>
+            </div>
+            <br> <br>
+        </div>
+        <div class="col-md-3">
+            <form method="GET" action="">
+                <div class="input-group">
+                    <input id="home_search" class="form-control" type="text" name='q' placeholder="Search posts" value="{{ request.get.q }}">
+                    <span class="input-group-btn">
+                            <button class="btn btn-default" type="text">Search</button>
+                        </span>
+                </div>
+            </form>
+            <br> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            <br> <br>
+        </div>
+    </div>
+</div>
 {% endblock content %}
