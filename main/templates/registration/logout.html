@@ -1,0 +1,38 @@
+{% extends "main/base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}Log into your account{% endblock %}
+{% block body_class %}{{ block.super }} login{% endblock %}
+
+
+{% block content_title %}
+  <h2>Log into your account</h2>
+{% endblock %}
+
+{% block content %}
+    <!-- WELCOME SECTION -->
+<div class="jumbotron" style="background-image: url({% static 'img/together.jpg' %}) ; background-size: 100%;">
+    <div class="container">
+        <h1 id="welcome">Good bye</h1>
+        <h3 id="have">We hope to see you again.</h3>
+    </div>
+</div>
+<!-- WELCOME SECTION -->
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <h3 align="center">Logged out</h3>
+            <h2 align="center">Feel free to log in anytime</h2>
+            <br>
+            <p align="right">Go back to the <a href="{% url '' %}">homepage</a> &rarr;</p>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+{% endblock %}
+

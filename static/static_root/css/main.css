@@ -7,18 +7,10 @@
 
 @import url(https://fonts.googleapis.com/css?family=Exo:400,200italic);
 
-/* Nav Bar */
 
-.navbar-inverse{
-    background-color: #151515;
-    border-color: #151515;
-    border-bottom: 4px solid #00bfff;
-}
-
-/* /Nav Bar */
 
 .container-fluid{
-    width: 60%;
+    width: 80%;
 }
 
 #welcome{
@@ -29,7 +21,8 @@
 }
 
 html, body{
-	font:14px/1.5 Arial, Helvetica, sans-serif;
+	font-size:18px;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	background: whitesmoke;
 }
 
@@ -39,11 +32,6 @@ html, body{
     padding-bottom: 10%;
     font-family: "Quasith-Regular";
     color: white;
-}
-
-.container{
-    width: 940px;
-    margin: 0 auto 40px;
 }
 
 .post-info{
@@ -58,4 +46,8 @@ html, body{
 
 hr{
     margin-right: 43px;
+}
+
+.post-buttons {
+	text-align: right;
 }

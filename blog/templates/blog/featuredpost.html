@@ -1,0 +1,44 @@
+{% load staticfiles %}
+<a href="{{post.get_absolute_url}}">
+{% if post.image %}
+    <img id="index_image" src="{{ post.image.url }}" class="img-thumbnail center-block">
+{% endif %}
+<h2><b>{{ post.title }}</b></h2>
+<h4>{{ post.subtitle }}</h4>
+</a>
+<p class="post-info">Posted by <a href="#">{{post.author}}</a> on {{post.updated}}</p>
+<p>{{ post.content|linebreaks|truncatechars:150 }}</p>
+<br>
+<div class="row">
+    <div class="col-sm-5">
+        <div class="col-sm-6 bg-success text-center">
+            Likes: {{ post.likes }}
+        </div>
+        <div class="col-sm-6 bg-danger text-center text-block">
+            Dislikes: {{ post.dislikes }}
+        </div>
+    </div>
+    {% if user.is_authenticated %}
+    <div>
+        <div class="col-sm-2">
+            <form action="{% url 'like' post.slug %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" value="vote" class="btn btn-success btn-sm btn-block">
+                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like
+                </button>
+            </form>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" class="btn btn-danger btn-sm btn-block">
+                <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Dislike
+            </button>
+        </div>
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-warning btn-sm btn-block">
+                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment
+            </button>
+        </div>
+    </div>
+    {% endif %}
+</div>
+<hr>

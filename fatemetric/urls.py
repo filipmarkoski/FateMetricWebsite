@@ -13,13 +13,23 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.conf.urls import url, include, patterns
+from django.conf.urls.static import static
 from django.contrib import admin
 
 urlpatterns = [
+    # Django URLs
     url(r'^admin/', admin.site.urls),
+    # Django Registration 2.0.4
+    url(r'^accounts/', include('registration.backends.hmac.urls')),
+    # FateMetric URLs
     url(r'^', include('main.urls')),
-    #url(r'^', include('blog.urls')),
+    url(r'^blog/', include('blog.urls')),
     #url(r'^', include('chat.urls')),
     #url(r'^', include('games.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

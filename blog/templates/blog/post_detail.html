@@ -1,0 +1,31 @@
+{% extends "main/base.html" %} {% load staticfiles %} {% load i18n %}{% load crispy_forms_tags %} 
+
+{% block title %}{{post.title}}{% endblock %} 
+{% block body_class %}{{ block.super }} post_detail{% endblock %} 
+{% block content_title %}<h2>View post</h2> {% endblock %} 
+
+{% block content %}
+
+<!-- WELCOME SECTION -->
+<div class="jumbotron detail_header" style="background-image: url({{post.image.url}}) ; background-size: 100%;">
+    <div class="container">
+        <h1 id="detail_title"><b>{{post.title}}</b></h1>
+        <h3 id="detail_title">{{post.subtitle}}</h3>
+        <h4 id="detail_title"><b>Posted by <a href="#">{{post.author}}</a> on {{post.updated}}</b></h3>
+    </div>
+</div>
+<!-- WELCOME SECTION -->
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div>
+            <div class="col-md-2"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p></div>
+            <div class="formBlock col-md-8 text-justify">
+                {{ post.content }} 
+            </div>
+            <div class="col-md-2"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p></div>
+        </div>
+    </div>
+</div>
+<hr> {% endblock %}

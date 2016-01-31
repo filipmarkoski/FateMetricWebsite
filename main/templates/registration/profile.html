@@ -1,0 +1,22 @@
+{% extends "main/base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block title %}Profile Page{% endblock %}
+
+
+{% block content_title %}
+  <h2>Profile</h2>
+{% endblock %}
+
+{% for field in form %}
+{{ field.error }}
+{% endfor %}
+
+{% block content %}
+  <form action="/accounts/profile/" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <p class="submit"><button type="submit">Update</button></p>
+  </form>
+{% endblock %}
+

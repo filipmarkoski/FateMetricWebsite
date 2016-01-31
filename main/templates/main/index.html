@@ -1,45 +1,49 @@
-{% extends 'main/base.html' %} {% load staticfiles %} {% block title %}FateMetric{% endblock title %} {% block content %}
+{% extends 'main/base.html' %} {% load staticfiles %} {% block title %}FateMetric{% endblock title %} {% block content %} {% if not user.is_authenticated %}
 <!-- WELCOME SECTION -->
 <div class="jumbotron" style="background-image: url({% static 'img/leather-slippers.jpg' %}) ; background-size: 100%;">
     <div class="container">
         <h1 id="welcome">Welcome to FateMetric</h1>
-        <h3 id="have">Have fun and ENJOY your jeruselums</h3>
+        <h3 id="have">Join. Search. Enjoy.</h3>
     </div>
 </div>
 <!-- WELCOME SECTION -->
+{% else %}
+<br><hr>
+{% endif %}
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2"><b>Categories:</b>
+        <div class="col-md-2 text-left">
+        <a href="{% url 'create' %}">
+            <button class="btn btn-primary btn-block">
+                Add a category
+            </button></a>
+            <hr><b>Categories:</b><br><br>
+            {% for category in categories %}
+                <ul>
+                    <li>{{category.category}}</li>
+                </ul>
+            {% endfor %}
             <br>
-            <br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            <br> <br>
         </div>
-        <div class="col-md-7">
-            <img src="{% static 'img/post-bg.jpg' %}" class="img-responsive">
-            <h2>This is the Title</h2>
-            <p class="post-info">This was posted on the 2nd of March 2015 by Stefan Nikolovski</p>
-            Preview: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        <div class="col-md-7 text-justify">
+            {% for post in posts %}
+                {% include "blog/featuredpost.html" %}
+            {% endfor %}
+        </div>
+        <div class="col-md-3 text-justify">
+        <a href="{% url 'create' %}">
+            <button class="btn btn-primary btn-block">
+                Make a Post
+            </button></a>
             <hr>
-            <div>
-            <div class="pull-left">
-            	Likes: 0 Dislikes: 0 Comments: 0
+            <div class="text-center">
+                <p>************</p>
+                <p>*******</p>
+                <p>AdSpace</p>
+                <p>*******</p>
+                <p>************</p>
             </div>
-
-            	<div style="text-align:right">
-            	<button type="button" class="btn btn-default">
-                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like
-            </button>
-            <button type="button" class="btn btn-default">
-                <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Dislike
-            </button>
-            <button type="button" class="btn btn-default">
-                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment
-            </button>
-            </div>
-            </div>
-            <br> <br>
-        </div>
-        <div class="col-md-3">
+            <hr>
             <form method="GET" action="">
                 <div class="input-group">
                     <input id="home_search" class="form-control" type="text" name='q' placeholder="Search posts" value="{{ request.get.q }}">
@@ -49,7 +53,8 @@
                 </div>
             </form>
             <br> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            <br> <br>
+            <br>
+            <br>
         </div>
     </div>
 </div>

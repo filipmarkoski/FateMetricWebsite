@@ -1,0 +1,44 @@
+{% extends "main/base.html" %} {% load staticfiles %} {% load i18n %}{% load crispy_forms_tags %} 
+
+{% block title %}Register for an account{% endblock %} 
+{% block body_class %}{{ block.super }} registration_form{% endblock %} 
+{% block content_title %}
+<h2>Register for an account</h2> {% endblock %} 
+
+{% block content %}
+
+<!-- WELCOME SECTION -->
+<div class="jumbotron" style="background-image: url({% static 'img/together.jpg' %}) ; background-size: 100%;">
+    <div class="container">
+        <h1 id="welcome">Registration</h1>
+        <h3 id="have">Please, fill out the form.</h3>
+    </div>
+</div>
+<!-- WELCOME SECTION -->
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="col-md-2"></div>
+            <div class="formBlock col-md-8 text-center">
+                <form action="{% url 'registration_register' %}" method="post">{% csrf_token %}
+                    <h3>Registration</h3>
+                    <br> {{ form|crispy }}
+                    <p class="submit">
+                        <button type="submit" class="updateButton btn btn-default btn-block">Register</button>
+                    </p>
+                </form>
+                <p>or</p>
+                <div class="formInstructions">
+                    <h3>Please Read</h3>
+                    <div class="formInstructionContainer">
+                        <h4>Why should I Register?</h4>
+                        <p>In order to submit posts you need to be registered. This can lead to substantial exposure to your opinion or content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr> {% endblock %}

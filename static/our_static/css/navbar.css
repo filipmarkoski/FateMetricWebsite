@@ -1,0 +1,14 @@
+
+/* Nav Bar */
+
+.navbar-inverse{
+    background-color: #151515;
+    border-color: #151515;
+    border-bottom: 4px solid #00bfff;
+}
+
+/* /Nav Bar */
+
+.navbar{
+	margin: 0;
+}
