@@ -60,10 +60,9 @@ html, body{
 
 #detail_title{
     text-align: center;
-    padding-top: 5%;
-    text-shadow: 5px 5px #000000;
-    font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-    color: white;
+    text-shadow: 2px 2px gainsboro;
+    font-family: "Quasith-Regular";
+    color: black;
 }
 
 #index_image{

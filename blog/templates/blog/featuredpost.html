@@ -3,6 +3,7 @@
 {% if post.image %}
     <img id="index_image" src="{{ post.image.url }}" class="img-thumbnail center-block">
 {% endif %}
+{% if post.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if post.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
 <h2><b>{{ post.title }}</b></h2>
 <h4>{{ post.subtitle }}</h4>
 </a>
@@ -21,7 +22,7 @@
     {% if user.is_authenticated %}
     <div>
         <div class="col-sm-2">
-            <form action="{% url 'like' post.slug %}" method="POST">
+            <form action="" method="POST">
                 {% csrf_token %}
                 <button type="submit" value="vote" class="btn btn-success btn-sm btn-block">
                     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like

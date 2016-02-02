@@ -1,19 +1,12 @@
-{% extends "base.html" %} {% load staticfiles %} {% block main_content %}
-<!-- Page Header -->
-<!-- Set your background image for this header on the line below. -->
-<header class="intro-header" style="background-image: url('{% static 'img/about-bg.jpg' %}')">
+{% extends "main/base.html" %} {% load staticfiles %} {% block content %}
+<!-- WELCOME SECTION -->
+<div class="jumbotron img-responsive" style="background-image: url({% static 'img/forest.jpg' %}) ; background-size: 100%;">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="page-heading">
-                    <h1>Feels bad, man.</h1>
-                    <hr class="small">
-                    <span class="subheading">Error 404</span>
-                </div>
-            </div>
-        </div>
+        <h1 id="welcome">Feels bad, man.</h1>
+        <h3 id="have">Error 404</h3>
     </div>
-</header>
+</div>
+<!-- WELCOME SECTION -->
 <!-- Main Content -->
 <div class="container">
     <div class="row">
@@ -24,4 +17,4 @@
         </div>
     </div>
 </div>
-<hr> {% endblock main_content %}
+<hr> {% endblock content %}

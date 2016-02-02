@@ -66,7 +66,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             #normpath(join(SITE_ROOT, 'templates')),
-            #os.path.join(BASE_DIR, "templates"),
+            os.path.join(BASE_DIR, "templates"),
             #os.path.join(BASE_DIR, "templates\\blog")
             #os.path.join(BASE_DIR, "blog\\templates\\blog"),
             #os.path.dirname(os.path.join(BASE_DIR, "templates")),

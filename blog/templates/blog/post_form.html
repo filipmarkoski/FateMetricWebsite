@@ -1,16 +1,16 @@
 {% extends "main/base.html" %} {% load staticfiles %} {% load i18n %}{% load crispy_forms_tags %} 
 
-{% block title %}Make a post{% endblock %} 
+{% block title %}{{heading}}{% endblock %} 
 {% block body_class %}{{ block.super }} post_form{% endblock %} 
-{% block content_title %}<h2>Make a post</h2> {% endblock %} 
+{% block content_title %}<h2>{{heading}}</h2> {% endblock %} 
 
 {% block content %}
 
 <!-- WELCOME SECTION -->
 <div class="jumbotron" style="background-image: url({% static 'img/together.jpg' %}) ; background-size: 100%;">
     <div class="container">
-        <h1 id="welcome">Make a Post</h1>
-        <h3 id="have">Share with the World.</h3>
+        <h1 id="welcome">{{heading}}</h1>
+        <h3 id="have">{{subheading}}</h3>
     </div>
 </div>
 <!-- WELCOME SECTION -->

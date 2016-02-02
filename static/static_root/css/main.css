@@ -44,10 +44,27 @@ html, body{
     padding-top: 20px;
 }
 
-hr{
-    margin-right: 43px;
-}
-
 .post-buttons {
 	text-align: right;
+}
+
+.post-image .img-responsive{
+    margin: 0 auto;
+}
+
+.detail_header{
+    text-shadow: 3px 3px #000000;
+    font-weight: 800;
+    font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+#detail_title{
+    text-align: center;
+    text-shadow: 2px 2px gainsboro;
+    font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    color: black;
+}
+
+#index_image{
+    max-height: 450px;
 }

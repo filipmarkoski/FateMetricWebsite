@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -20,7 +18,6 @@ class Categories(models.Model):
 
 class PostManager(models.Manager):
     def active(self, *args, **kwargs):
-        # Post.objects.all() = super(PostManager, self).all()
         return super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())
 
 
@@ -41,7 +38,7 @@ class Post(models.Model):
 	width_field = models.IntegerField(default=0)
 	content = models.TextField(max_length=15000, null=True, blank=True)
 	draft = models.BooleanField(default=False)
-	publish = models.DateField(auto_now=False, auto_now_add=False)
+	publish = models.DateField(auto_now=False, auto_now_add=False, default=timezone.now)
 	updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 	post_category = models.ForeignKey(Categories)

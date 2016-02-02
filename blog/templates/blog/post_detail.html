@@ -1,30 +1,54 @@
-{% extends "main/base.html" %} {% load staticfiles %} {% load i18n %}{% load crispy_forms_tags %} 
-
-{% block title %}{{post.title}}{% endblock %} 
-{% block body_class %}{{ block.super }} post_detail{% endblock %} 
-{% block content_title %}<h2>View post</h2> {% endblock %} 
-
-{% block content %}
-
-<!-- WELCOME SECTION -->
-<div class="jumbotron detail_header" style="background-image: url({{post.image.url}}) ; background-size: 100%;">
-    <div class="container">
-        <h1 id="detail_title"><b>{{post.title}}</b></h1>
-        <h3 id="detail_title">{{post.subtitle}}</h3>
-        <h4 id="detail_title"><b>Posted by <a href="#">{{post.author}}</a> on {{post.updated}}</b></h3>
-    </div>
+{% extends "main/base.html" %} {% load staticfiles %} {% load i18n %}{% load crispy_forms_tags %} {% block title %}{{post.title}}{% endblock %} {% block body_class %}{{ block.super }} post_detail{% endblock %} {% block content_title %}
+<h2>View post</h2> {% endblock %} {% block content %}
+<hr>
+<br>
+<div class="detail_allTitles">
+    <h1 id="detail_title"><b>{{post.title}}</b></h1>
+<h3 id="detail_title">{{post.subtitle}}</h3>
+<h4 id="detail_title"><b>Posted by <a href="#">{{post.author}}</a> on {{post.updated}}</b></h4>
 </div>
-<!-- WELCOME SECTION -->
-
+<hr>
 <!-- Main Content -->
 <div class="container">
     <div class="row">
         <div>
-            <div class="col-md-2"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p></div>
+            <div class="col-md-2"></div>
             <div class="formBlock col-md-8 text-justify">
-                {{ post.content }} 
+                {% if post.image %}
+                <img src="{{ post.image.url }}" class="img-responsive center-block"> {% endif %}
+                <hr> {{ post.content|safe }}
+                <div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                
+                <br>
+
+                <div class="row">
+                    <div class="col-xs-4">
+                        <button id="comments_button" class="btn btn-default btn-block">Show Comments{{user.id}}</button>
+                    </div>
+                    {% if user.id == post.author_id or user.is_superuser or user.is_staff%}
+                    <div class="col-xs-4">
+                        <a href="{% url 'update' post.slug %}">
+                            <input class="btn btn-default btn-block" type="submit" value="Change Post" />
+                        </a>
+                    </div>
+                    <div class="col-xs-4">
+                        <a href="{% url 'delete' post.slug %}">
+                            <input class="btn btn-default btn-block" type="submit" value="Delete Post" />
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div align="center">
+                    <div id="comments_wrapper" style="text-align: center">
+                        <hr>
+                        <div id="facebook_comments" class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div>
+                    </div>
+                </div>
+
+
             </div>
-            <div class="col-md-2"><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p></div>
+            <div class="col-md-2"></div>
         </div>
     </div>
 </div>
