@@ -29,8 +29,9 @@ sitemaps = {
 urlpatterns = [
     # Django URLs
     url(r'^admin/', admin.site.urls),
-    # Django Registration 2.0.4
+    # Third Part URLs
     url(r'^accounts/', include('registration.backends.hmac.urls')),
+    url(r'^', include('favicon.urls')),
 
     url(r'^robots\.txt$', lambda r: HttpResponse("User-agent: *\nDisallow:", content_type="text/plain")),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),

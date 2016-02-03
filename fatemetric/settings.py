@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'n58b)ymof=%yt_jprfl+s2u&cl99!@g9f4%)%$e-(qjd9eqjch'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 #TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = ['*']
 
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'registration',
     'crispy_forms',
+    'favicon',
     'main',
     'blog',
 ]
@@ -66,7 +67,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             #normpath(join(SITE_ROOT, 'templates')),
-            os.path.join(BASE_DIR, "templates"),
+            #os.path.join(BASE_DIR, "templates"),
             #os.path.join(BASE_DIR, "templates\\blog")
             #os.path.join(BASE_DIR, "blog\\templates\\blog"),
             #os.path.dirname(os.path.join(BASE_DIR, "templates")),
@@ -165,3 +166,4 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media_root")
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+FAVICON_PATH = STATIC_URL + 'img/favicon.ico'
