@@ -1,7 +1,7 @@
 *.sqlite3
 
 # Personal Ignores
-media_root/
+media_root/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
