@@ -2,6 +2,8 @@
 
 $(function() {
 
+	//alert("Hello!");
+
 	$("#comments_wrapper").hide();
 
 	$("#comments_button").click(function() {
@@ -10,13 +12,7 @@ $(function() {
 		} else {
 			$("#comments_wrapper").slideUp("fast");
 		}
-        //$("#wrapper").slideToggle();
     });
-	/*function toggler(divId) {
-	  $("#" + divId).toggle();
-	}*/
-
-	//alert("Hello!");
 
 	//Scroll to Top
 	$('body').scrollToTop({

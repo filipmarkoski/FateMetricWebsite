@@ -1,5 +1,9 @@
 {% extends "main/base.html" %} {% load staticfiles %} {% load i18n %}{% load crispy_forms_tags %} 
 
+{% block head_extra %}
+    {{form.media}}
+{% endblock head_extra %}
+
 {% block title %}{{heading}}{% endblock %} 
 {% block body_class %}{{ block.super }} post_form{% endblock %} 
 {% block content_title %}<h2>{{heading}}</h2> {% endblock %} 
@@ -16,27 +20,36 @@
 <!-- WELCOME SECTION -->
 
 <!-- Main Content -->
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div>
-            <div class="col-md-2"></div>
-            <div class="formBlock col-md-8 text-center">
+            <div class="col-md-6">
+                <h3>Post Preview</h3> <hr>
+                <div class="content-preview">
+                    <h4 id="preview-title"></h4>
+                    <p id="preview-content"></p>
+                </div>
+                <hr>
+            </div>
+            <div class="formBlock col-md-6">
+                <h3>Post Edit</h3> <hr>
                 <form method='POST' action='' enctype='multipart/form-data'>
                 {% csrf_token %}
 				{{ form|crispy }}
 				<input type='submit' class='btn btn-default btn-block' value='Create Post' />
 				</form>
-                <p>or</p>
-                <div class="formInstructions">
+                
+            </div>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="formInstructions">
                     <h3>Please Read</h3>
                     <div class="formInstructionContainer">
                         <h4>Why should I make a post?</h4>
                         <p>In order to share content you need to make a post. This can lead to substantial exposure to your opinion.</p>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2"></div>
-        </div>
     </div>
 </div>
 <hr> {% endblock %}

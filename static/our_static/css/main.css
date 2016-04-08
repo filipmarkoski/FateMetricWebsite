@@ -68,3 +68,8 @@ html, body{
 #index_image{
     max-height: 450px;
 }
+
+.wmd-panel{
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}

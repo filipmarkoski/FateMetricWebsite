@@ -25,6 +25,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    {% block head_extra %}
+        
+    {% endblock head_extra %}
 </head>
 
 <body>
@@ -42,6 +45,8 @@
     {% include "main/navbar.html" %} {% block content %} {% endblock content %} {% include "main/footer.html" %}
     <!-- jQuery -->
     <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
+    <!-- Content Markdown -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
     <script>
     window.jQuery || document.write('<script src="{% static "js/jquery-2.2.0.min.js" %}"><\/script>');
     </script>
@@ -52,6 +57,52 @@
     <script src="{% static 'js/my_script.js' %}"></script>
     <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
     <script src="{% static 'js/jquery-scrollToTop.min.js' %}"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".content-markdown").each(function(){
+                /*It is importan to use this*/
+                var content = $(this).text();
+                var markedContent = (content);
+                $(this).html(markedContent);
+            });
+            $(".post-detail-item img").each(function(){
+                $(this).addClass("img-responsive");
+            });
+
+            var titleInput = $("#id_title");
+            $("#preview-title").text(titleInput.val());
+
+            var contentInput = $("#id_content");
+            /*$("#preview-content").html(marked(contentItem.val()));*/
+
+            function setContent(value){
+                var markedContent = marked(value);
+                $("#preview-content").html(markedContent);
+                $("#preview-content img").each(function(){
+                    $(this).addClass("img-responsive");
+                });
+            }
+            setContent(contentInput.val());
+
+            contentInput.keyup(function(){
+                var newContent = $(this).val()
+                setContent(newContent);
+            });
+
+            function setTitle(value){
+                $("#preview-title").text(value);
+            }
+            setTitle(titleInput.val());
+
+            titleInput.keyup(function(){
+                var newTitle = $(this).val();
+                setTitle(newTitle);
+            });
+
+        });
+    </script>
 </body>
 
 </html>

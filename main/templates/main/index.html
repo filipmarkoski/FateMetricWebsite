@@ -1,4 +1,4 @@
-{% extends 'main/base.html' %} {% load staticfiles %} {% block title %}FateMetric{% endblock title %} {% block content %} {% if not user.is_authenticated %}
+{% extends 'main/base.html' %} {% load staticfiles %} {% load crispy_forms_tags %} {% block title %}FateMetric{% endblock title %} {% block content %} {% if not user.is_authenticated %}
 <!-- WELCOME SECTION -->
 <div class="jumbotron" style="background-image: url({% static 'img/leather-slippers.jpg' %}) ; background-size: 100%;">
     <div class="container">
@@ -13,14 +13,34 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2 text-left">
-            <a href="{% url 'create' %}">
-                <button class="btn btn-primary btn-block">
-                    Add a category
-                </button>
-            </a>
-            <hr><b>Categories:</b>
+            {% if request.user.is_authenticated %}
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Add a category</button>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Create a category</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form method='POST' action='' enctype='multipart/form-data'>
+                                {% csrf_token %} {{ categories_form|crispy }}
+                                <input type='submit' class='btn btn-default btn-block' value='Create Category' />
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr> {% endif %}
+            <b>Categories:</b>
             <br>
-            <br> {% for category in categories %}
+            <br> {% for category in categories reversed %}
             <ul>
                 <li>{{category.category}}</li>
             </ul>
@@ -28,7 +48,8 @@
             <br>
         </div>
         <div class="col-md-7 text-justify">
-            {% for post in posts %} {% include "blog/featuredpost.html" %} {% endfor %}
+            {% for post in posts %}
+            <div class="post-detail-item">{% include "blog/featuredpost.html" %} </div>{% endfor %}
             <div class="pagination">
                 <span class="step-links">
         {% if queryset.has_previous %}
@@ -67,7 +88,7 @@
                         </span>
                 </div>
             </form>
-            <br> 
+            <br>
             <br>
             <br>
         </div>

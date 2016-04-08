@@ -8,14 +8,14 @@
 <h4>{{ post.subtitle }}</h4>
 </a>
 <p class="post-info">Posted by <a href="#">{{post.author}}</a> on {{post.updated}}</p>
-<p>{{ post.content|linebreaks|truncatechars:150 }}</p>
+{{ post.get_markdown|truncatechars_html:150 }}
 <br>
 <div class="row">
     <div class="col-sm-5">
-        <div class="col-sm-6 bg-success text-center">
+        <div id="divLikes{{post.id}}" class="col-sm-6 bg-success text-center">
             Likes: {{ post.likes }}
         </div>
-        <div class="col-sm-6 bg-danger text-center text-block">
+        <div id="divDislikes{{post.id}}" class="col-sm-6 bg-danger text-center text-block">
             Dislikes: {{ post.dislikes }}
         </div>
     </div>
@@ -24,15 +24,18 @@
         <div class="col-sm-2">
             <form action="" method="POST">
                 {% csrf_token %}
-                <button type="submit" value="vote" class="btn btn-success btn-sm btn-block">
+                <button type="submit" value="{{post.id}}" class="like_button{{post.id}} btn btn-success btn-sm btn-block">
                     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like
                 </button>
             </form>
         </div>
         <div class="col-sm-2">
-            <button type="button" class="btn btn-danger btn-sm btn-block">
-                <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Dislike
-            </button>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <button type="button" value="{{post.id}}" class="dislike_button{{post.id}} btn btn-danger btn-sm btn-block">
+                    <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Dislike
+                </button>
+            </form>
         </div>
         <div class="col-sm-3">
             <button type="button" class="btn btn-warning btn-sm btn-block">
@@ -43,3 +46,44 @@
     {% endif %}
 </div>
 <hr>
+<script type="text/javascript">
+
+$(".like_button{{post.id}}").click(function(event) {
+    event.preventDefault();
+    $.ajaxSettings.traditional = true;
+    $.ajax({
+        type: 'POST',
+        url: '{% url "like" %}',
+        dataType: 'json',
+        data: {
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            LikeId: $(event.target).val(),
+        },
+        success: function(response) {
+            /* It's important to add the space before #divLikes, I don't know why */
+            $('#divLikes{{post.id}}').load(' #divLikes{{post.id}}', function() {
+                $(this).children().unwrap()
+            })
+        }
+    });
+});
+
+$(".dislike_button{{post.id}}").click(function(event) {
+    event.preventDefault();
+    $.ajaxSettings.traditional = true;
+    $.ajax({
+        type: 'POST',
+        url: '{% url "dislike" %}',
+        dataType: 'json',
+        data: {
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            DislikeId: $(event.target).val(),
+        },
+        success: function(response) {
+            $('#divDislikes{{post.id}}').load(' #divDislikes{{post.id}}', function() {
+                $(this).children().unwrap()
+            })
+        }
+    });
+});
+</script>

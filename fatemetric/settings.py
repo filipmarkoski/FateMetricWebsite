@@ -40,9 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'registration',
     'crispy_forms',
+    'rest_framework',
     'favicon',
+    'markdown_deux',
+    'pagedown',
     'main',
     'blog',
+    'comments',
+    'chat',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -167,3 +172,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media_root")
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 FAVICON_PATH = STATIC_URL + 'img/favicon.ico'
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'PAGE_SIZE': 10,
+}

@@ -3,22 +3,24 @@ from django.template import RequestContext
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import send_mail
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.sitemaps import Sitemap
 from django.contrib import messages
-from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect, Http404
 from django.db.models import Q
 from blog.models import Post, Categories
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 import datetime
+# Create your imports here
+from blog.forms import CategoriesForm
+
 # Create your views here.
 def view_homepage(request, slug=None):
 	categories_list = Categories.objects.all().order_by("id")
+	posts_list = Post.objects.active()
 	today = timezone.now().date()
 
-	posts_list = Post.objects.active()
 	if request.user.is_staff or request.user.is_superuser:
 		posts_list = Post.objects.all()
 
@@ -38,15 +40,72 @@ def view_homepage(request, slug=None):
 	except EmptyPage:
 		queryset = paginator.page(paginator.num_pages)
 	
+	categories_form = CategoriesForm(request.POST or None)
+	if categories_form.is_valid():
+		instance = categories_form.save(commit=False)
+		instance.save()
+		messages.success(request, "Category Successfully Created")
+		
 	context = {
 		'queryset': queryset,
 		'posts': queryset,
-		'categories': categories_list,	
+		'categories': categories_list,
+		'categories_form': categories_form,
 	}
 	return render(request, 'main/index.html', context)
 
 def view_aboutpage(request):
 	return render(request, 'main/about.html', {})
+
+@login_required
+def view_dislike(request):
+	# AJAX Dislike Button
+	if request.user.is_authenticated:
+		if request.method == 'POST':
+			dislikepostId = request.POST['DislikeId']
+			dislikepost = get_object_or_404(Post, id=dislikepostId)
+			dislikepost.dislikes += 1
+			dislikepost.save()
+			response_data = {}
+			return JsonResponse(response_data)
+	else: 
+		raise Http404
+
+	return 200
+
+@login_required
+def view_like(request):
+	# AJAX Like Button
+	if request.user.is_authenticated:
+		if request.method == 'POST':
+			likepostId = request.POST.get('LikeId')
+			likepost = get_object_or_404(Post, id=likepostId)
+			likepost.likes += 1
+			likepost.save()
+			response_data = {}
+			return JsonResponse(response_data)
+	else: 
+		raise Http404
+
+	return 200	
+
+def view_contact(request):
+	# AJAX Contact Us
+	if request.user.is_authenticated:
+		if request.method == 'POST':
+			PersonEmail = request.POST.get('PersonEmail_ajax', '')
+			PersonMessage = request.POST.get('PersonMessage_ajax', '')
+			# print(PersonEmail + " " + PersonMessage + " by " + str(request.user) )
+
+			send_mail(str(request.user)+" - "+PersonEmail, PersonMessage, PersonEmail,
+			['filip.markoski45@gmail.com'], fail_silently=False)
+
+			response_data = {}
+			return JsonResponse(response_data)
+	else:
+		raise Http404
+
+	return 200
 
 def custom_404(request):
 	response = render_to_response('main/404.html', {}, context_instance=RequestContext(request))

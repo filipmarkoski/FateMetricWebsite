@@ -1,9 +1,14 @@
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models.signals import pre_save
 from django.utils import timezone
 from django.utils.text import slugify
+from django.utils.safestring import mark_safe
+from markdown_deux import markdown
+
+from comments.models import Comment
 # Create your models here.
 
 #Post.objects.all()
@@ -56,6 +61,21 @@ class Post(models.Model):
 	class Meta:
 		ordering = ["-timestamp", "-updated"]
 
+	def get_markdown(self):
+		content = self.content
+		return mark_safe(markdown(content))
+
+	@property
+	def comments(self):
+		instance = self
+		qs = Comment.objects.filter_by_instance(instance)
+		return qs
+
+	@property
+	def get_content_type(self):
+		instance = self
+		content_type = ContentType.objects.get_for_model(instance.__class__)
+		return content_type
 
 def create_slug(instance, new_slug=None):
     slug = slugify(instance.title)

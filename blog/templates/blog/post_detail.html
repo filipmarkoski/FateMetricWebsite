@@ -4,8 +4,8 @@
 <br>
 <div class="detail_allTitles">
     <h1 id="detail_title"><b>{{post.title}}</b></h1>
-<h3 id="detail_title">{{post.subtitle}}</h3>
-<h4 id="detail_title"><b>Posted by <a href="#">{{post.author}}</a> on {{post.updated}}</b></h4>
+    <h3 id="detail_title">{{post.subtitle}}</h3>
+    <h4 id="detail_title"><b>Posted by <a href="#">{{post.author}}</a> on {{post.updated}}</b></h4>
 </div>
 <hr>
 <!-- Main Content -->
@@ -16,11 +16,10 @@
             <div class="formBlock col-md-8 text-justify">
                 {% if post.image %}
                 <img src="{{ post.image.url }}" class="img-responsive center-block"> {% endif %}
-                <hr> {{ post.content|safe }}
+                <hr>
+                <div class="post-detail-item">{{ post.get_markdown }}</div>
                 <div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
-                
                 <br>
-
                 <div class="row">
                     <div class="col-xs-4">
                         <button id="comments_button" class="btn btn-default btn-block">Show Comments</button>
@@ -38,18 +37,49 @@
                     </div>
                     {% endif %}
                 </div>
-
-                <div align="center">
-                    <div id="comments_wrapper" style="text-align: center">
+                <div>
+                    <div id="comments_wrapper">
                         <hr>
-                        <div id="facebook_comments" class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div>
+                        <!-- <div id="facebook_comments" class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div> -->
+                        <p class='lead'>Comments</p>
+                        <form method="POST" action="."> {% csrf_token %} 
+                            {{ comment_form|crispy }}
+                            <input type='submit' value='Post comment' class='btn btn-default'>
+                        </form>
+                        <hr> {% for comment in comments %}
+
+                        <blockquote>
+                            <p>{{ comment.content }}</p>
+                            <footer>via {{ comment.user }} | {{ comment.timestamp|timesince }} ago | {% if comment.children.count > 0 %}{{ comment.children.count }} Comment{% if comment.children.count > 1 %}s{% endif %} | {% endif %} <a class='comment-reply-btn' href='#'>Reply</a></footer><br>
+                            <div class='comment-reply'>
+                                {% for child_comment in comment.children reversed %}
+                                <blockquote>
+                                    <p>{{ child_comment.content }}</p>
+                                    <footer>via {{ child_comment.user }} | {{ child_comment.timestamp|timesince }} ago</footer>
+                                </blockquote>
+                                {% endfor %}
+                                <form method="POST" action="."> {% csrf_token %} 
+                                    {{ comment_form|crispy }}
+                                    <input type='hidden' name='parent_id' value='{{ comment.id }}'>
+                                    <input type='submit' value='Reply' class='btn btn-default'>
+                                </form>
+                            </div>
+                        </blockquote>
+                        <hr/> {% endfor %}
                     </div>
                 </div>
-
-
             </div>
             <div class="col-md-2"></div>
         </div>
     </div>
 </div>
-<hr> {% endblock %}
+<hr> 
+
+<style type="text/css">
+    .textarea {
+        height: 64px !important;
+    }
+</style>
+
+{% endblock %}
+

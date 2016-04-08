@@ -22,6 +22,15 @@ from main.views import blog_sitemap, custom_404, custom_500
 from django.http import HttpResponse
 
 from django.conf.urls import handler404, handler500
+
+''' Django Rest Framework '''
+from blog import views
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'categories', views.CategoriesViewSet)
+router.register(r'posts', views.PostViewSet)
+
 sitemaps = {
     'blogs': blog_sitemap
 }
@@ -29,6 +38,7 @@ sitemaps = {
 urlpatterns = [
     # Django URLs
     url(r'^admin/', admin.site.urls),
+    
     # Third Part URLs
     url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^', include('favicon.urls')),
@@ -39,8 +49,17 @@ urlpatterns = [
     # FateMetric URLs
     url(r'^', include('main.urls')),
     url(r'^blog/', include('blog.urls')),
-    #url(r'^', include('chat.urls')),
+    url(r'^chat/', include('chat.urls')),
     #url(r'^', include('games.urls')),
+
+    # Apparently, the URLs are read backwards,
+    # meaning FateMetric URLs need to be
+    # overwritten by rest_framework.urls  
+
+    # This URL (router) changes the home page.
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
 
 ]
 
