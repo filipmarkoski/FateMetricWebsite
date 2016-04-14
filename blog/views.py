@@ -15,6 +15,7 @@ from django.contrib.auth.models import User
 # Structure Imports here.
 from .forms import PostForm
 from .models import Post, Categories
+from .utils import get_read_time
 from comments.forms import CommentForm
 from comments.models import Comment
 
@@ -55,19 +56,15 @@ def post_create(request):
 	}
 	return render(request, "blog/post_form.html", context)
 
-# def post_detail(request, slug=None):
-# 	instance = get_object_or_404(Post, slug=slug)
-# 	context = {
-# 		"post": instance,
-# 	}
-# 	return render(request, "blog/post_detail.html", context)
-
 def post_detail(request, slug=None):
 	instance = get_object_or_404(Post, slug=slug)
 	if instance.publish > timezone.now().date() or instance.draft:
 		if not request.user.is_staff or not request.user.is_superuser:
 			raise Http404
 	share_string = quote_plus(instance.content)
+
+	read_time = get_read_time(instance.get_markdown())
+
 	initial_data = {
 	"content_type": instance.get_content_type,
 	"object_id": instance.id
@@ -103,6 +100,7 @@ def post_detail(request, slug=None):
 	"share_string": share_string,
 	"comments": comments,
 	"comment_form":form,
+	"read_time": read_time,
 	}
 	return render(request, "blog/post_detail.html", context)
 

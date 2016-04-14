@@ -50,6 +50,7 @@ urlpatterns = [
     url(r'^', include('main.urls')),
     url(r'^blog/', include('blog.urls')),
     url(r'^chat/', include('chat.urls')),
+    url(r'^comments/', include('comments.urls', namespace='comments')),
     #url(r'^', include('games.urls')),
 
     # Apparently, the URLs are read backwards,

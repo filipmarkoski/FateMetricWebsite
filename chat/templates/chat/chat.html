@@ -1,108 +1,95 @@
-{% extends "main/base.html" %} {% load staticfiles %} {% block title %} Chat {% endblock title %} {% block content %}
+{% extends "main/base.html" %} {% load staticfiles %} {% load crispy_forms_tags %}{% block title %} Chat {% endblock title %} {% block content %}
 <!-- WELCOME SECTION -->
-<br><br><br>
+<br>
+<br>
+<br>
 <!-- WELCOME SECTION -->
 <!-- Main Content -->
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <div id="wrapper">
-                <div id="menu">
-                    <p class="welcome">Welcome, <b></b></p>
-                    <p class="logout"><a id="exit" href="#">Exit Chat</a></p>
-                    <div style="clear:both"></div>
-                </div>
-                <div id="chatbox"></div>
-                <form style="text-align:center" name="message" action="">
-                    <input name="usermsg" type="text" id="usermsg" size="63" />
-                    <input name="submitmsg" type="submit" id="submitmsg" value="Send" />
+            {% if request.user.is_authenticated %}
+            <div id="div-messages" class="row">
+                <blockquote>
+                    {% for object in messages reversed %} <b>{{object.user}}:</b> {{ object.message }}
+                    <br> {% comment %}
+                    <footer>{{object.timestamp}}</footer>
+                    {% endcomment %} {% empty %}
+                    <p>Sorry, no messages.</p>
+                    {% endfor %}
+                </blockquote>
+            </div>
+            <tr></tr>
+            <div class="row">
+                <form id="chat-form" method="POST" action="{% url 'message' %}">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <input id="message-bar" class="form-control" type="text" placeholder="Send a message..">
+                        <span class="input-group-btn">
+                            <button id="message-button" class="btn btn-info" type="text">Send</button>
+                        </span>
+                    </div>
                 </form>
             </div>
+            {% else %}
+            <div class="text-center"><br><br><br><br><br><br><br><hr>
+                <h3>You have to be logged in.</h3>
+                <h4>Go and <a href="{% url 'registration_register' %}">Register</a> if you haven't already.</h4><hr><br><br><br><br><br><br><br><br>
+            </div>
+            {% endif %}
         </div>
         <div class="col-md-2"></div>
     </div>
 </div>
-<br><br><br>
-<style type="text/css">
-/* CSS Document */
+<br>
+<script type="text/javascript">
+$("#chat-form").on('submit', function(event) {
+    event.preventDefault();
+    $.ajaxSettings.traditional = true;
+    $.ajax({
+        url: '{% url "message" %}',
+        type: 'POST',
+        data: {
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            message: $("#message-bar").val(),
+        },
 
-form,
-p,
-span {
-    margin: 0;
-    padding: 0;
+        success: function(response) {
+            $("#div-messages").load(' #div-messages', function() {
+                $(this).children().unwrap();
+            });
+            $("#message-bar").val("");
+        }
+
+    });
+});
+
+$(document).ready(function() {
+    $('#message-button').attr('disabled', 'disabled');
+    $('#message-bar').keyup(function() {
+        if ($(this).val() != '') {
+            $('#message-button').removeAttr('disabled');
+        } else {
+            $('#message-button').attr('disabled', 'disabled');
+        }
+    });
+    $("#div-messages").keyup(function() {
+        $(this).load(' #div-messages', function() {
+            $(this).children().unwrap();
+        });
+    });
+
+});
+
+function refreshPage() {
+    $("#div-messages").load(' #div-messages', function() {
+        $(this).children().unwrap();
+    });
 }
 
-input {
-    font: 12px arial;
-}
-
-a {
-    color: #0000FF;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-#wrapper,
-#loginform {
-    margin: 0 auto;
-    padding-bottom: 25px;
-    background: #EBF4FB;
-    width: 504px;
-    border: 1px solid #ACD8F0;
-}
-
-#loginform {
-    padding-top: 18px;
-}
-
-#loginform p {
-    margin: 5px;
-}
-
-#chatbox {
-    text-align: left;
-    margin: 0 auto;
-    margin-bottom: 25px;
-    padding: 10px;
-    background: #fff;
-    height: 270px;
-    width: 430px;
-    border: 1px solid #ACD8F0;
-    overflow: auto;
-}
-
-#usermsg {
-    width: 395px;
-    border: 1px solid #ACD8F0;
-}
-
-#submit {
-    width: 60px;
-}
-
-.error {
-    color: #ff0000;
-}
-
-#menu {
-    padding: 12.5px 25px 12.5px 25px;
-}
-
-.welcome {
-    float: left;
-}
-
-.logout {
-    float: right;
-}
-
-.msgln {
-    margin: 0 0 2px 0;
-}
-</style>
+$(function() {
+    refreshTimer = setInterval(refreshPage, 2000);
+});
+</script>
 {% endblock content %}

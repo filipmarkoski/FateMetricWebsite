@@ -14,7 +14,7 @@ from django.utils import timezone
 import datetime
 # Create your imports here
 from blog.forms import CategoriesForm
-
+from blog.utils import get_read_time
 # Create your views here.
 def view_homepage(request, slug=None):
 	categories_list = Categories.objects.all().order_by("id")
@@ -45,7 +45,8 @@ def view_homepage(request, slug=None):
 		instance = categories_form.save(commit=False)
 		instance.save()
 		messages.success(request, "Category Successfully Created")
-		
+	
+	#read_time = get_read_time(queryset.get_markdown())
 	context = {
 		'queryset': queryset,
 		'posts': queryset,
