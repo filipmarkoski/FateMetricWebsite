@@ -6,8 +6,9 @@
         <p class="footer-links">
             <a href="{% url '' %}">Home</a> ·
             <a href="{% url 'about' %}">About</a> ·
-            <a href="{% url 'chat' %}">Chat</a> ·
+            <a href="{% url 'chat' %}">Chat</a>{% comment %} ·
             <a href="#">Games</a>
+            {% endcomment %}
         </p>
         <p class="footer-company-name">FateMetric &copy; 2016</p>
         <div class="footer-icons">
@@ -21,7 +22,7 @@
         <p>Contact Us</p>
         <form action="#" method="post"> {% csrf_token %}
             <input type="text" name="email" placeholder="Your Email" id="PersonEmail_html" />
-            <textarea name="message" placeholder="Message" id="PersonMessage_html">
+            <textarea name="message" placeholder="Your Message" id="PersonMessage_html">
             </textarea>
             <p id="successMessage">Your message has been sent.</p>
             <button class="contact_button">Send</button>
@@ -31,6 +32,7 @@
 <!-- /FOOTER -->
 <script type="text/javascript">
 $("#successMessage").hide();
+$('#PersonMessage_html').text('')
 
 $(".contact_button").click(function(event) {
     event.preventDefault();

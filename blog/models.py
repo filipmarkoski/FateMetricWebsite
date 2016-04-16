@@ -70,7 +70,7 @@ class Post(models.Model):
 		instance = self
 		qs = Comment.objects.filter_by_instance(instance)
 		return qs
-
+	
 	@property
 	def get_content_type(self):
 		instance = self

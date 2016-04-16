@@ -8,7 +8,7 @@ class CategoriesAdmin(admin.ModelAdmin):
 admin.site.register(Categories, CategoriesAdmin)
 
 class PostModelAdmin(admin.ModelAdmin):
-	list_display = ["title", "author", "updated", "timestamp", ]
+	list_display = ["title", "author", "updated", "timestamp", "id",]
 	list_display_links = ["title", "updated",]
 	#list_editable = ["title"]
 	list_filter = ["updated", "timestamp",]

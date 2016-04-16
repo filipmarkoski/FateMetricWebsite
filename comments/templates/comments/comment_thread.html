@@ -13,7 +13,7 @@
             <div class="col-md-2"></div>
             <div class="formBlock col-md-8 text-justify">
                     <p>{{ comment.content }}</p>
-                    <footer>via {{ comment.user }} | {{ comment.timestamp|timesince }} ago | {% if comment.children.count > 0 %}{{ comment.children.count }} Comment{% if comment.children.count > 1 %}s{% endif %}{% endif %}
+                    <footer>via {{ comment.user }} | {{ comment.timestamp|timesince }} ago {% if comment.children.count > 0 %} | {{ comment.children.count }} Comment{% if comment.children.count > 1 %}s{% endif %}{% endif %}
                         <br>
                         <br>
                     </footer>

@@ -95,12 +95,12 @@ def post_detail(request, slug=None):
 		return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
 	comments = instance.comments
 	context = {
-	"title": instance.title,
-	"post": instance,
-	"share_string": share_string,
-	"comments": comments,
-	"comment_form":form,
-	"read_time": read_time,
+		"title": instance.title,
+		"post": instance,
+		"share_string": share_string,
+		"comments": comments,
+		"comment_form":form,
+		"read_time": read_time,
 	}
 	return render(request, "blog/post_detail.html", context)
 

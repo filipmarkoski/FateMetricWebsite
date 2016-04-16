@@ -38,16 +38,19 @@
             </form>
         </div>
         <div class="col-sm-3">
-            <button type="button" class="btn btn-warning btn-sm btn-block">
-                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment
-            </button>
+            {% for comment in comments %} {% if post.id == comment.object_id %}
+            <a href="{{comment.get_absolute_url}}">
+                <button type="button" class="btn btn-warning btn-sm btn-block">
+                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment
+                </button>
+            </a>
+            {% endif %} {% endfor %}
         </div>
     </div>
     {% endif %}
 </div>
 <hr>
 <script type="text/javascript">
-
 $(".like_button{{post.id}}").click(function(event) {
     event.preventDefault();
     $.ajaxSettings.traditional = true;

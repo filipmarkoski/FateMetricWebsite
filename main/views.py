@@ -15,6 +15,7 @@ import datetime
 # Create your imports here
 from blog.forms import CategoriesForm
 from blog.utils import get_read_time
+from comments.models import Comment
 # Create your views here.
 def view_homepage(request, slug=None):
 	categories_list = Categories.objects.all().order_by("id")
@@ -46,12 +47,13 @@ def view_homepage(request, slug=None):
 		instance.save()
 		messages.success(request, "Category Successfully Created")
 	
-	#read_time = get_read_time(queryset.get_markdown())
+	comments = Comment.objects.all()
 	context = {
 		'queryset': queryset,
 		'posts': queryset,
 		'categories': categories_list,
 		'categories_form': categories_form,
+		'comments': comments,
 	}
 	return render(request, 'main/index.html', context)
 
