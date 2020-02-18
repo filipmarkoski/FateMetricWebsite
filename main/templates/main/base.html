@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 <!DOCTYPE html>
 <html>
 
@@ -42,7 +42,9 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
     </script>
-    {% include "main/navbar.html" %} {% block content %} {% endblock content %} {% include "main/footer.html" %}
+    {% include "main/navbar.html" %}
+    {% block content %} {% endblock content %}
+    {% include "main/footer.html" %}
     <!-- jQuery -->
     <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
     <!-- Content Markdown -->

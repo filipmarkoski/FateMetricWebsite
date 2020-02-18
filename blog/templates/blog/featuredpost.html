@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 <a href="{{post.get_absolute_url}}">
 {% if post.image %}
     <img id="index_image" src="{{ post.image.url }}" class="img-thumbnail center-block">

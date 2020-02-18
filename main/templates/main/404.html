@@ -1,20 +1,21 @@
-{% extends "main/base.html" %} {% load staticfiles %} {% block content %}
-<!-- WELCOME SECTION -->
-<div class="jumbotron img-responsive" style="background-image: url({% static 'img/forest.jpg' %}) ; background-size: 100%;">
-    <div class="container">
-        <h1 id="welcome">Feels bad, man.</h1>
-        <h3 id="have">Error 404</h3>
+{% extends "main/base.html" %} {% load static %} {% block content %}
+    <!-- WELCOME SECTION -->
+    <div class="jumbotron img-responsive"
+         style="background-image: url({% static 'img/forest.jpg' %}) ; background-size: 100%;">
+        <div class="container">
+            <h1 id="welcome">Feels bad, man.</h1>
+            <h3 id="have">Error 404</h3>
+        </div>
     </div>
-</div>
-<!-- WELCOME SECTION -->
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div align="center">
-                <img src="{% static 'img/sad.png' %}" height="459" width="436">
+    <!-- WELCOME SECTION -->
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div align="center">
+                    <img src="{% static 'img/sad.png' %}" height="459" width="436">
+                </div>
             </div>
         </div>
     </div>
-</div>
-<hr> {% endblock content %}
+    <hr> {% endblock content %}

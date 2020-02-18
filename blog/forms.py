@@ -11,7 +11,7 @@ class CategoriesForm(forms.ModelForm):
         ]
 
 class PostForm(forms.ModelForm):
-    content = forms.CharField(widget=PagedownWidget(show_preview=False))
+    content = forms.CharField(widget=PagedownWidget())
     publish = forms.DateField(widget=forms.SelectDateWidget)
     class Meta:
         model = Post

@@ -14,7 +14,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+# BASE_DIR:  D:\code\py\FateMetricWebsite
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'n58b)ymof=%yt_jprfl+s2u&cl99!@g9f4%)%$e-(qjd9eqjch'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-#TEMPLATE_DEBUG = True
-ALLOWED_HOSTS = ['localhost']
+DEBUG = True
+# TEMPLATE_DEBUG = True
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -38,46 +38,41 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.sitemaps',
-    'registration',
+    'django_registration',
     'crispy_forms',
     'rest_framework',
     'favicon',
     'markdown_deux',
-    'pagedown',
+    'pagedown.apps.PagedownConfig',
     'main',
     'blog',
     'comments',
     'chat',
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'fatemetric.urls'
 
-#test = os.path.join(BASE_DIR, "blog\\templates\\blog")
-#print(test)
-#print(BASE_DIR + "\\blog\\templates\\blog")
+BLOG_DIR = os.path.join(BASE_DIR, 'blog')
+CHAT_DIR = os.path.join(BASE_DIR, 'chat')
+COMMENTS_DIR = os.path.join(BASE_DIR, 'comments')
+MAIN_DIR = os.path.join(BASE_DIR, 'main')
+
+directories = [BASE_DIR, BLOG_DIR, CHAT_DIR, COMMENTS_DIR, MAIN_DIR]
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            #normpath(join(SITE_ROOT, 'templates')),
-            #os.path.join(BASE_DIR, "templates"),
-            #os.path.join(BASE_DIR, "templates\\blog")
-            #os.path.join(BASE_DIR, "blog\\templates\\blog"),
-            #os.path.dirname(os.path.join(BASE_DIR, "templates")),
-            #"C:\\Users\\filip\\Python\\FMENV\\fatemetric\\blog\\templates\\blog",
-        ],
+        'DIRS': [os.path.join(dir, 'templates') for dir in directories],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -92,7 +87,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'fatemetric.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
@@ -102,7 +96,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -122,7 +115,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # noreplyjacqueswords@gmail.com
 # jackqueswords
 
@@ -136,12 +128,11 @@ EMAIL_PORT = 587
 
 EMAIL_USE_TLS = True
 
-#ctzlswgdbkrtskox
+# ctzlswgdbkrtskox
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -155,7 +146,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
@@ -178,5 +168,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
 }

@@ -1,7 +1,7 @@
-from django.conf.urls import url, include, patterns
+from django.urls import path
 from chat import views
 
 urlpatterns = [
-    url(r'message/$', views.message, name='message'),
-    url(r'$', views.view_chat, name='chat'),
+    path('message/', views.message, name='message'),
+    path('', views.view_chat, name='chat'),
 ]

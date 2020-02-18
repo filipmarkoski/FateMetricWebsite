@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 <nav class="navbar navbar-inverse navbar-custom navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header page-scroll">
@@ -28,14 +28,14 @@
                 {% endif %} 
                 {% if not user.is_authenticated %}
                 <li>
-                    <a href="{% url 'registration_register' %}"><b>Register</b></a>
+                    <a href="{% url 'django_registration_register' %}"><b>Register</b></a>
                 </li>
                 <li>
-                    <a href="{% url 'auth_login' %}"><b>Log in</b></a>
+                    <a href="{% url 'login' %}"><b>Log in</b></a>
                 </li>
                 {% else %}
                 <li>
-                    <a href="{% url 'auth_logout' %}"><b>Log out</b></a>
+                    <a href="{% url 'logout' %}"><b>Log out</b></a>
                 </li>
                 {% endif %}
             </ul>
