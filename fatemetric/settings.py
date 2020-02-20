@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Native django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,12 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    # Third-party apps
     'django_registration',
     'crispy_forms',
     'rest_framework',
     'favicon',
     'markdown_deux',
     'pagedown.apps.PagedownConfig',
+    # Local apps
     'main',
     'blog',
     'comments',
@@ -151,14 +154,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static", "static_root")
+STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'static_root')
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static", "our_static"),
-)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static', 'our_static'),)
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media_root")
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media_root')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 FAVICON_PATH = STATIC_URL + 'img/favicon.ico'

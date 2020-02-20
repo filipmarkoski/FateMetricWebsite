@@ -50,6 +50,11 @@ pip install -r requirements.txt
 
 wait while the installation finishes
 
+the `pip install -r requirements.txt` does the same as 
+```
+pip install Django django-crispy-forms django-favicon django-markdown-deux django-pagedown django-registration djangorestframework gunicorn markdown2 pillow
+```
+
 ## Initializing the local sqlite database
 if the installation of packages was successful run the following django-related commands: 
 ```

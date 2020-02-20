@@ -2,6 +2,7 @@ from django.urls import path
 from django.contrib import admin
 from blog import views
 from blog.views import post_update
+
 urlpatterns = [
     path('create/', views.post_create, name='create'),
     path('<slug:slug>/update/', views.post_update, name='update'),

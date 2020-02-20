@@ -1,6 +1,6 @@
 {% extends "main/base.html" %} 
 {% load static %}
-{% block title %}Account activation complete{% endblock %} 
+{% block title %}Account activation failed{% endblock %}
 {% block body_class %}{{ block.super }} registration_activation_complete{% endblock %} 
 {% block content_title %}
 <h3>Account activation complete</h3> 
@@ -10,8 +10,8 @@
 <!-- WELCOME SECTION -->
 <div class="jumbotron" style="background-image: url({% static 'img/contact-bg.jpg' %}) ; background-size: 100%;">
     <div class="container">
-        <h1 id="welcome">Welcome to FateMetric</h1>
-        <h3 id="have">We are glad that you are joining.</h3>
+        <h1 id="welcome">Account activation failed. :(</h1>
+        <h3 id="have">Please check again or contact an admin</h3>
     </div>
 </div>
 <!-- WELCOME SECTION -->
@@ -20,8 +20,10 @@
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="formBlock">
-                <p style="font-size: 16px;">Congratulations, your account with Jacque's Words has been activated.</p>
+                <p style="font-size: 16px;">Sadly, the activation of your account has failed.</p>
+                <!-- {% comment %}TODO: Find a generic solution for the link reference to `Log in`{% endcomment %} -->
                 <p style="font-size: 16px;">You're ready to <a href="https://jacqueswords.herokuapp.com/accounts/login/">Log In</a>.</p>
+
             </div>
         </div>
     </div>
